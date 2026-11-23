@@ -46,9 +46,7 @@ theorem UpperTheory.V.KT.nearcoord_le_I0 :
   have hcq : (star c ⬝ᵥ G *ᵥ c).re ≤ 1 := by
     rw [hc, star_smul, Matrix.mulVec_smul, dotProduct_smul, smul_dotProduct]
     simp only [Complex.star_def, Complex.conj_ofReal, smul_eq_mul, ← mul_assoc, ← Complex.ofReal_mul, Complex.re_ofReal_mul]
-    have : d⁻¹ * d⁻¹ * (star xw ⬝ᵥ G *ᵥ xw).re ≤ d⁻¹ * d⁻¹ * d ^ 2 := by
-      apply mul_le_mul_of_nonneg_left hterm; positivity
-    calc _ ≤ d⁻¹ * d⁻¹ * d ^ 2 := this
+    calc _ ≤ d⁻¹ * d⁻¹ * d ^ 2 := mul_le_mul_of_nonneg_left hterm (by positivity)
       _ = 1 := by field_simp
   have hcr := cramer_le_one G c hpsd hdiag hcq a
   have hca : ‖xw a‖ = d * ‖c a‖ := by
